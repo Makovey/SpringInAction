@@ -8,6 +8,9 @@
 }
 
 .creation-block {
+    display: flex;
+    flex-direction: column;
+    width: 20%;
     padding: 10px;
 }
 
@@ -28,10 +31,5 @@ label {
 
 .validationError {
     font-size: 20px;
-    color: red;
-}
-
-.validationError{
-    font-size: 26px;
     color: red;
 }

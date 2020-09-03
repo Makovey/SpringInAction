@@ -61,8 +61,6 @@ public class DesignTacoController {
         if (errors.hasErrors()) {
             return "design";
         }
-        // TODO СООБЩЕНИЕ ОБ ОШИБКЕ ИНГРЕДИЕНТОВ НЕ ВЫВОДИТСЯ
-        // TODO ПРОПУСКАЕТ И БЕЗ ЭТОГО
         log.info("Processing design: " + taco);
         return "redirect:/orders/current";
     }

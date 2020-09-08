@@ -28,3 +28,8 @@ label {
     font-size: 20px;
     color: red;
 }
+
+input{
+    padding: 5px;
+    margin-bottom: 5px;
+}

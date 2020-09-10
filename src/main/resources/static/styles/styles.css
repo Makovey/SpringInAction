@@ -21,7 +21,6 @@ label {
 .deliver-form {
     display: flex;
     flex-direction: column;
-    width: 15%;
 }
 
 .validationError {
@@ -29,7 +28,16 @@ label {
     color: red;
 }
 
-input{
+input {
     padding: 5px;
     margin-bottom: 5px;
+}
+
+.wrapper {
+    display: flex;
+    justify-content: space-between;
+}
+
+.pay-block{
+    width: 100%;
 }

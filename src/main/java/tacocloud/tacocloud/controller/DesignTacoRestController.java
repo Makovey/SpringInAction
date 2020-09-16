@@ -4,11 +4,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.hateoas.CollectionModel;
-import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import tacocloud.tacocloud.assemblers.TacoResourceAssembler;
+import tacocloud.tacocloud.resources.TacoResource;
 import tacocloud.tacocloud.entity.Taco;
 import tacocloud.tacocloud.repositories.TacoRepo;
 
@@ -31,12 +32,14 @@ public class DesignTacoRestController {
         this.tacoRepo = tacoRepo;
     }
 
+    //TODO used deprecated method
     @GetMapping("/recent")
-    public CollectionModel<EntityModel<Taco>> recentTacos() {
+    public CollectionModel<TacoResource> recentTacos() {
         PageRequest page = PageRequest.of(0, 1, Sort.by("createdAt").descending());
 
         List<Taco> tacos = tacoRepo.findAll(page).getContent();
-        CollectionModel<EntityModel<Taco>> recentResources = CollectionModel.wrap(tacos);
+        CollectionModel<TacoResource> tacoResources = new TacoResourceAssembler().toCollectionModel(tacos);
+        CollectionModel<TacoResource> recentResources = new CollectionModel<>(tacoResources);
 
         recentResources.add(
                 WebMvcLinkBuilder

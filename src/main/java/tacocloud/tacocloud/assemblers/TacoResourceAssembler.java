@@ -1,20 +1,24 @@
 package tacocloud.tacocloud.assemblers;
 
-import org.springframework.hateoas.CollectionModel;
-import org.springframework.hateoas.server.RepresentationModelAssembler;
-import tacocloud.tacocloud.dto.TacoResource;
+import org.springframework.hateoas.server.core.Relation;
+import org.springframework.hateoas.server.mvc.RepresentationModelAssemblerSupport;
+import tacocloud.tacocloud.controller.DesignTacoRestController;
+import tacocloud.tacocloud.resources.TacoResource;
 import tacocloud.tacocloud.entity.Taco;
 
-public class TacoResourceAssembler implements RepresentationModelAssembler<Taco, TacoResource> {
+public class TacoResourceAssembler extends RepresentationModelAssemblerSupport<Taco, TacoResource> {
 
-
-    @Override
-    public TacoResource toModel(Taco entity) {
-        return new TacoResource(entity);
+    public TacoResourceAssembler() {
+        super(DesignTacoRestController.class, TacoResource.class);
     }
 
     @Override
-    public CollectionModel<TacoResource> toCollectionModel(Iterable<? extends Taco> entities) {
-        return createResourceWithId(entities.getId(), entities);
+    protected TacoResource instantiateModel(Taco taco) {
+        return new TacoResource(taco);
+    }
+
+    @Override
+    public TacoResource toModel(Taco entity) {
+        return createModelWithId(entity.getId(), entity);
     }
 }
